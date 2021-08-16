@@ -19,9 +19,6 @@ class ListFragment : Fragment() {
 //    private val adapter = ListAdapter by lazy { ListAdapter() }
     private val adapter = ListAdapter()
 
-//    private var _binding: FragmentListBinding? = null
-//    private val binding get() = _binding!!
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,9 +38,9 @@ class ListFragment : Fragment() {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
 
-        view.findViewById<ConstraintLayout>(R.id.listLayout).setOnClickListener {
-            findNavController().navigate(R.id.action_listFragment_to_updateFragment)
-        }
+//        view.findViewById<ConstraintLayout>(R.id.listLayout).setOnClickListener {
+//            findNavController().navigate(R.id.action_listFragment_to_updateFragment)
+//        }
 
         // Set Menu
         setHasOptionsMenu(true)
