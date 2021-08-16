@@ -29,6 +29,9 @@ class AddFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
+        view.findViewById<Spinner>(R.id.priorities_spinner).onItemSelectedListener =
+            mSharedViewModel.listener
+
         return view
     }
 
