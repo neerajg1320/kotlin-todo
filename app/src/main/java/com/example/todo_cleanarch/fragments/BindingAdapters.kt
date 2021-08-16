@@ -6,11 +6,9 @@ import com.example.todo_cleanarch.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class BindingAdapters {
-
     companion object {
-
-        @BindingAdapter("android:navigateToAddFragment")
         @JvmStatic
+        @BindingAdapter("android:navigateToAddFragment")
         fun navigateToAddFragment(view: FloatingActionButton, navigate: Boolean) {
             view.setOnClickListener {
                 if (navigate) {

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_cleanarch.R
 import com.example.todo_cleanarch.TAG
 import com.example.todo_cleanarch.data.viewmodels.ToDoViewModel
+import com.example.todo_cleanarch.databinding.FragmentListBinding
 import com.example.todo_cleanarch.fragments.SharedViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -24,18 +25,24 @@ class ListFragment : Fragment() {
     private val mToDoViewModel:ToDoViewModel by viewModels()
     private val mSharedViewModel: SharedViewModel by viewModels()
 
+    private var _binding:FragmentListBinding? = null
+    private val binding get() = _binding!!
+
     private val adapter: ListAdapter by lazy { ListAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_list, container, false)
+        // Inflate the layout for this fragment. Not used when binding is used.
+        // val view =  inflater.inflate(R.layout.fragment_list, container, false)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+        _binding = FragmentListBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.mSharedViewModel = mSharedViewModel
+
+//        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        setupRecyclerView()
 
         mToDoViewModel.getAllData.observe(viewLifecycleOwner, Observer { dataList ->
             mSharedViewModel.checkIfDatabaseEmpty(dataList)
@@ -46,14 +53,27 @@ class ListFragment : Fragment() {
             showEmptyDatabaseViews(it)
         })
 
-        view.findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener {
-            findNavController().navigate(R.id.action_listFragment_to_addFragment)
-        }
+// We have support this using BindingAdapter android:navigateToAddFragment
+//        view.findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener {
+//            findNavController().navigate(R.id.action_listFragment_to_addFragment)
+//        }
 
         // Set Menu
         setHasOptionsMenu(true)
 
-        return view
+        // return view
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun setupRecyclerView() {
+        val recyclerView = binding.recyclerView
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireActivity())
     }
 
     private fun showEmptyDatabaseViews(emptyDatabase: Boolean) {
@@ -89,4 +109,6 @@ class ListFragment : Fragment() {
         builder.setMessage("Are you sure you want to delete all items?")
         builder.create().show()
     }
+
+
 }
