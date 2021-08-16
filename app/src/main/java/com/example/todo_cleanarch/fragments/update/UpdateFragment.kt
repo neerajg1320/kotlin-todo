@@ -14,32 +14,38 @@ import com.example.todo_cleanarch.R
 import com.example.todo_cleanarch.data.models.Priority
 import com.example.todo_cleanarch.data.models.ToDoData
 import com.example.todo_cleanarch.data.viewmodels.ToDoViewModel
+import com.example.todo_cleanarch.databinding.FragmentUpdateBinding
 import com.example.todo_cleanarch.fragments.SharedViewModel
 
 
 class UpdateFragment : Fragment() {
     private val args by navArgs<UpdateFragmentArgs>()
+
     private val mSharedViewModel:SharedViewModel by viewModels()
     private val mToDoViewModel:ToDoViewModel by viewModels()
+
+    private var _binding:FragmentUpdateBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_update, container, false)
+        // val view = inflater.inflate(R.layout.fragment_update, container, false)
+        _binding = FragmentUpdateBinding.inflate(inflater, container, false)
+        binding.args = args
 
         setHasOptionsMenu(true)
 
-        view.findViewById<EditText>(R.id.current_title_et).setText(args.currentItem.title)
-        view.findViewById<EditText>(R.id.current_description_et).setText(args.currentItem.description)
+        binding.currentPrioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
 
-        val current_spinner = view.findViewById<Spinner>(R.id.current_priorities_spinner)
-        current_spinner.setSelection(mSharedViewModel.parsePriority(args.currentItem.priority))
-        current_spinner.onItemSelectedListener = mSharedViewModel.listener
+        return binding.root
+    }
 
-
-        return view
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

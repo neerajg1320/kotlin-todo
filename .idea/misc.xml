@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/item_background.xml" value="0.23125" />
+        <entry key="app/src/main/res/layout/fragment_update.xml" value="0.213768115942029" />
         <entry key="app/src/main/res/layout/row_layout.xml" value="0.324685534591195" />
       </map>
     </option>
