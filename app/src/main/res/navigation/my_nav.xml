@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.todo_cleanarch.fragments.ListFragment"
+        android:name="com.example.todo_cleanarch.fragments.list.ListFragment"
         android:label="ToDo List"
         tools:layout="@layout/fragment_list" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.example.todo_cleanarch.fragments.AddFragment"
+        android:name="com.example.todo_cleanarch.fragments.add.AddFragment"
         android:label="Add"
         tools:layout="@layout/fragment_add" >
         <action
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateFragment"
-        android:name="com.example.todo_cleanarch.fragments.UpdateFragment"
+        android:name="com.example.todo_cleanarch.fragments.update.UpdateFragment"
         android:label="Update"
         tools:layout="@layout/fragment_update" >
         <action

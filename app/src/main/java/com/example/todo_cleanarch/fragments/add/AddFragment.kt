@@ -1,7 +1,6 @@
-package com.example.todo_cleanarch.fragments
+package com.example.todo_cleanarch.fragments.add
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.*
 
 import android.widget.EditText
@@ -11,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.todo_cleanarch.R
-import com.example.todo_cleanarch.data.models.Priority
 import com.example.todo_cleanarch.data.models.ToDoData
 import com.example.todo_cleanarch.data.viewmodels.ToDoViewModel
+import com.example.todo_cleanarch.fragments.SharedViewModel
 
 class AddFragment : Fragment() {
 

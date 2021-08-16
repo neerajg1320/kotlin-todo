@@ -1,4 +1,4 @@
-package com.example.todo_cleanarch.fragments
+package com.example.todo_cleanarch.fragments.list
 
 import android.os.Bundle
 import android.view.*
