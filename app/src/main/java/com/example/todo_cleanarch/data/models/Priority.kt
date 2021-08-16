@@ -1,4 +1,4 @@
-package com.example.todo_cleanarch.data
+package com.example.todo_cleanarch.data.models
 
 enum class Priority {
     HIGH,

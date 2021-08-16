@@ -1,14 +1,18 @@
-package com.example.todo_cleanarch
+package com.example.todo_cleanarch.fragments
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.findNavController
+import com.example.todo_cleanarch.R
+import com.example.todo_cleanarch.databinding.FragmentListBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListFragment : Fragment() {
 
+    private var _binding: FragmentListBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
