@@ -18,6 +18,7 @@ import com.example.todo_cleanarch.data.viewmodels.ToDoViewModel
 class AddFragment : Fragment() {
 
     private val mToDoViewModel:ToDoViewModel by viewModels()
+    private val mSharedViewModel: SharedViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,10 +51,10 @@ class AddFragment : Fragment() {
         val mPriority = view.findViewById<Spinner>(R.id.priorities_spinner).selectedItem.toString()
         val mDescription = view.findViewById<EditText>(R.id.description_et).text.toString()
 
-        val validation = verifyDataFromUser(mTitle, mDescription)
+        val validation = mSharedViewModel.verifyDataFromUser(mTitle, mDescription)
 
         if (validation) {
-            val newData = ToDoData(0, mTitle, parsePriority(mPriority), mDescription)
+            val newData = ToDoData(0, mTitle, mSharedViewModel.parsePriority(mPriority), mDescription)
             mToDoViewModel.insertData(newData)
             Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_SHORT).show()
 
@@ -66,18 +67,4 @@ class AddFragment : Fragment() {
 
     }
 
-    private fun verifyDataFromUser(title: String, descrition: String): Boolean {
-        return if(TextUtils.isEmpty(title) || TextUtils.isEmpty(descrition)){
-            false
-        } else !(title.isEmpty() || descrition.isEmpty())
-    }
-
-    private fun parsePriority(priority: String): Priority {
-        return when(priority) {
-            "High" -> {Priority.HIGH}
-            "Medium" -> {Priority.MEDIUM}
-            "Low" -> {Priority.LOW}
-            else -> Priority.LOW
-        }
-    }
 }
