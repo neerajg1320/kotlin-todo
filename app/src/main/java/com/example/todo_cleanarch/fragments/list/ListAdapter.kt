@@ -53,6 +53,7 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
     fun setData(toDoDataList: List<ToDoData>) {
         this.dataList = toDoDataList
+        notifyDataSetChanged()
     }
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
