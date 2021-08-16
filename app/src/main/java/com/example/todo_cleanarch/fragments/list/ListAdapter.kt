@@ -41,7 +41,9 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         }
 
         holder.itemView.findViewById<ConstraintLayout>(R.id.row_background).setOnClickListener {
-            holder.itemView.findNavController().navigate(R.id.action_listFragment_to_updateFragment)
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(dataList[position])
+            // holder.itemView.findNavController().navigate(R.id.action_listFragment_to_updateFragment)
+            holder.itemView.findNavController().navigate(action)
         }
     }
 
