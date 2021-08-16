@@ -49,9 +49,10 @@ class ListFragment : Fragment() {
             Log.d(TAG, "mToDoViewModel.Observer(): Setting Adapter dataList")
             adapter.setData(dataList)
         })
-        mSharedViewModel.emptyDatabase.observe(viewLifecycleOwner, Observer {
-            showEmptyDatabaseViews(it)
-        })
+// Removed after adding android:emptyDatabase
+//        mSharedViewModel.emptyDatabase.observe(viewLifecycleOwner, Observer {
+//            showEmptyDatabaseViews(it)
+//        })
 
 // We have support this using BindingAdapter android:navigateToAddFragment
 //        view.findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener {
@@ -76,15 +77,15 @@ class ListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
     }
 
-    private fun showEmptyDatabaseViews(emptyDatabase: Boolean) {
-        if (emptyDatabase) {
-            view?.findViewById<ImageView>(R.id.no_data_imageView)?.visibility = View.VISIBLE
-            view?.findViewById<TextView>(R.id.no_data_textView)?.visibility = View.VISIBLE
-        } else {
-            view?.findViewById<ImageView>(R.id.no_data_imageView)?.visibility = View.INVISIBLE
-            view?.findViewById<TextView>(R.id.no_data_textView)?.visibility = View.INVISIBLE
-        }
-    }
+//    private fun showEmptyDatabaseViews(emptyDatabase: Boolean) {
+//        if (emptyDatabase) {
+//            view?.findViewById<ImageView>(R.id.no_data_imageView)?.visibility = View.VISIBLE
+//            view?.findViewById<TextView>(R.id.no_data_textView)?.visibility = View.VISIBLE
+//        } else {
+//            view?.findViewById<ImageView>(R.id.no_data_imageView)?.visibility = View.INVISIBLE
+//            view?.findViewById<TextView>(R.id.no_data_textView)?.visibility = View.INVISIBLE
+//        }
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         // super.onCreateOptionsMenu(menu, inflater)
