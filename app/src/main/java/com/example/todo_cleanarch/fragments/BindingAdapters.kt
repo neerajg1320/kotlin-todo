@@ -2,11 +2,16 @@ package com.example.todo_cleanarch.fragments
 
 import android.view.View
 import android.widget.Spinner
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
+import androidx.fragment.app.ListFragment
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.example.todo_cleanarch.R
 import com.example.todo_cleanarch.data.models.Priority
+import com.example.todo_cleanarch.data.models.ToDoData
+import com.example.todo_cleanarch.fragments.list.ListFragmentDirections
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class BindingAdapters {
@@ -40,6 +45,26 @@ class BindingAdapters {
                     Priority.LOW -> {spinner.setSelection(2)}
                 }
 
+        }
+
+        @JvmStatic
+        @BindingAdapter("android:parsePriorityColor")
+        fun parsePriorityColor(cardView: CardView, priority: Priority) {
+
+            return when(priority) {
+                Priority.HIGH -> {cardView.setCardBackgroundColor(cardView.context.getColor(R.color.red))}
+                Priority.MEDIUM -> {cardView.setCardBackgroundColor(cardView.context.getColor(R.color.yellow))}
+                Priority.LOW -> {cardView.setCardBackgroundColor(cardView.context.getColor(R.color.green))}
+            }
+        }
+
+        @JvmStatic
+        @BindingAdapter("android:sendDataToUpdateFragment")
+        fun sendDataToUpdateFragment(view: ConstraintLayout, currentItem: ToDoData) {
+            view.setOnClickListener {
+                val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
+                view.findNavController().navigate(action)
+            }
         }
     }
 }
