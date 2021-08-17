@@ -19,6 +19,8 @@ import com.example.todo_cleanarch.databinding.FragmentListBinding
 import com.example.todo_cleanarch.fragments.SharedViewModel
 import com.example.todo_cleanarch.fragments.list.adapter.ListAdapter
 import com.google.android.material.snackbar.Snackbar
+import jp.wasabeef.recyclerview.animators.LandingAnimator
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
 class ListFragment : Fragment() {
     private val mToDoViewModel:ToDoViewModel by viewModels()
@@ -65,7 +67,9 @@ class ListFragment : Fragment() {
         val recyclerView = binding.recyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
-
+        recyclerView.itemAnimator = LandingAnimator().apply {
+            addDuration = 300
+        }
         // swipe to delete
         swipeToDelete(recyclerView)
     }
