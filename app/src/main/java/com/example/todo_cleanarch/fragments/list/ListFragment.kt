@@ -122,7 +122,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         val snackbar = Snackbar.make(view, "Delete '${deletedItem.title}'", Snackbar.LENGTH_LONG)
         snackbar.setAction("Undo") {
             mToDoViewModel.insertData(deletedItem)
-            adapter.notifyItemChanged(position)
+            // Removed after StaggeredGridLayoutManager caused crash in 'Undo Delete'
+            // adapter.notifyItemChanged(position)
         }
         snackbar.show()
     }
