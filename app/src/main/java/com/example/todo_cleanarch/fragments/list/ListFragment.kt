@@ -4,14 +4,11 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_cleanarch.R
@@ -19,7 +16,7 @@ import com.example.todo_cleanarch.TAG
 import com.example.todo_cleanarch.data.viewmodels.ToDoViewModel
 import com.example.todo_cleanarch.databinding.FragmentListBinding
 import com.example.todo_cleanarch.fragments.SharedViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.todo_cleanarch.fragments.list.adapter.ListAdapter
 
 class ListFragment : Fragment() {
     private val mToDoViewModel:ToDoViewModel by viewModels()
@@ -66,8 +63,23 @@ class ListFragment : Fragment() {
         val recyclerView = binding.recyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+
+        // swipe to delete
+        swipeToDelete(recyclerView)
     }
 
+    private fun swipeToDelete(recyclerView: RecyclerView) {
+        val swipeToDeleteCallback = object: SwipeToDelete() {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val itemToDelete = adapter.dataList[viewHolder.adapterPosition]
+                mToDoViewModel.deleteItem(itemToDelete)
+                Toast.makeText(requireContext(), "Successfully removed '${itemToDelete.title}'", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         // super.onCreateOptionsMenu(menu, inflater)

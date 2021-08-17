@@ -1,16 +1,8 @@
-package com.example.todo_cleanarch.fragments.list
+package com.example.todo_cleanarch.fragments.list.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_cleanarch.R
-import com.example.todo_cleanarch.data.models.Priority
 import com.example.todo_cleanarch.data.models.ToDoData
 import com.example.todo_cleanarch.databinding.RowLayoutBinding
 
@@ -33,7 +25,7 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         }
     }
 
-    private var dataList = emptyList<ToDoData>()
+    var dataList = emptyList<ToDoData>()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
