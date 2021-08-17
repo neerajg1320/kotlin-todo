@@ -90,8 +90,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         val recyclerView = binding.recyclerView
         recyclerView.adapter = adapter
         // recyclerView.layoutManager = LinearLayoutManager(requireActivity())
-         recyclerView.layoutManager = GridLayoutManager(requireActivity(), 2)
-        //recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        // recyclerView.layoutManager = GridLayoutManager(requireActivity(), 2)
+        recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recyclerView.itemAnimator = SlideInUpAnimator().apply {
             addDuration = 300
         }
