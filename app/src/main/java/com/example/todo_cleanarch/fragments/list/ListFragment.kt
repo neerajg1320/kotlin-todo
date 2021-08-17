@@ -14,6 +14,7 @@ import com.example.todo_cleanarch.R
 import com.example.todo_cleanarch.TAG
 import com.example.todo_cleanarch.data.models.ToDoData
 import com.example.todo_cleanarch.data.viewmodels.ToDoViewModel
+import com.example.todo_cleanarch.data.viewmodels.observeOnce
 import com.example.todo_cleanarch.databinding.FragmentListBinding
 import com.example.todo_cleanarch.fragments.SharedViewModel
 import com.example.todo_cleanarch.fragments.list.adapter.ListAdapter
@@ -79,8 +80,9 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun searchThroughDatabase(query: String) {
         val searchQuery:String = "%$query%"
 
-        mToDoViewModel.searchDatabase(searchQuery).observe(this, Observer { list ->
+        mToDoViewModel.searchDatabase(searchQuery).observeOnce(viewLifecycleOwner, Observer { list ->
             list?.let {
+                Log.d(TAG, "searchThroughDatabase: $searchQuery")
                 adapter.setData(it)
             }
         })
@@ -141,10 +143,10 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_delete_all -> confirmRemoval()
-            R.id.menu_priority_high -> mToDoViewModel.sortByHighPriority().observe(this, Observer {
+            R.id.menu_priority_high -> mToDoViewModel.sortByHighPriority().observe(viewLifecycleOwner, Observer {
                 adapter.setData(it)
             })
-            R.id.menu_priority_low -> mToDoViewModel.sortByLowPriority().observe(this, Observer {
+            R.id.menu_priority_low -> mToDoViewModel.sortByLowPriority().observe(viewLifecycleOwner, Observer {
                 adapter.setData(it)
             })
         }
